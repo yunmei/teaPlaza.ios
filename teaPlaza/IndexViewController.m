@@ -11,6 +11,7 @@
 #import "YMGlobal.h"
 #import "AppDelegate.h"
 #import "SBJson.h"
+#import "ContentViewController.h"
 
 @interface IndexViewController ()
 
@@ -59,12 +60,16 @@
     
     // Testing MKNetworkKit
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.test" forKey:@"method"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getAdList" forKey:@"method"];
     MKNetworkOperation* op = [YMGlobal getOperation:params];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
         NSLog(@"object:%@", object);
+        if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
+            self.adArray = [object objectForKey:@"result"];
+            [self showAdList];
+        }
         [HUD hide:YES];
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         NSLog(@"Error:%@", error);
@@ -75,7 +80,11 @@
 
 - (void)adClickAction:(id)sender
 {
-
+    UIButton *btn = sender;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    ContentViewController *contentViewController = [[ContentViewController alloc]init];
+    contentViewController.appId = [NSString stringWithFormat:@"%d",btn.tag];
+    [self.navigationController pushViewController:contentViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,8 +116,21 @@
             [adImageBtn addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
             [YMGlobal loadImage:[o objectForKey:@"image"] andButton:adImageBtn andControlState:UIControlStateNormal];
             [self.adScrollView addSubview:adImageBtn];
+            i++;
         }
         self.adPageControl.numberOfPages = countAdList;
+    }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.tag == 100) {
+        int offset = (int)scrollView.contentOffset.x;
+        int page = (int)(offset/320);
+        if (offset%320 > 160) {
+            page = page+1;
+        }
+        [self.adPageControl setCurrentPage:page];
     }
 }
 
@@ -123,6 +145,7 @@
         [adScrollView setShowsHorizontalScrollIndicator:NO];
         [adScrollView setBackgroundColor:[UIColor grayColor]];
         adScrollView.tag = 100;
+        adScrollView.delegate = self;
     }
     return adScrollView;
 }

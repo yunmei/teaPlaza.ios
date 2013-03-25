@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IndexViewController : UIViewController
+@interface IndexViewController : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *adScrollView;
 @property (strong, nonatomic) UIPageControl *adPageControl;

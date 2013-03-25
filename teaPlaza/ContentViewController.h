@@ -10,4 +10,7 @@
 
 @interface ContentViewController : UIViewController
 
+@property (strong, nonatomic) NSString *appId;
+@property (strong, nonatomic) UILabel *navLabel;
+
 @end
