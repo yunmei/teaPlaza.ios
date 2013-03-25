@@ -25,6 +25,8 @@
     UINavigationController *listNavigationController = [[UINavigationController alloc]initWithRootViewController:[[ListViewController alloc] initWithNibName:@"ListViewController" bundle:nil]];
     UINavigationController *userNavigationController = [[UINavigationController alloc]initWithRootViewController:[[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil]];
     UINavigationController *aboutNavigationController = [[UINavigationController alloc]initWithRootViewController:[[AboutViewController alloc] initWithNibName:@"AboutViewController" bundle:nil]];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_bar_bg"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:180/255.0f green:180/255.0f blue:180/255.0f alpha:1]];
     
     // 定义tabBarController
     self.tabBarController = [[UITabBarController alloc] init];

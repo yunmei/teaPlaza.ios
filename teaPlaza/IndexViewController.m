@@ -25,6 +25,13 @@
         self.title = NSLocalizedString(@"茶广场", @"茶广场");
         [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_index_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_index"]];
         [self.tabBarItem setTitle:@"茶广场"];
+        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(60, 0, 200, 44)];
+        lable.backgroundColor = [UIColor clearColor];
+        lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
+        lable.font = [UIFont systemFontOfSize:20.0];
+        lable.text = self.title;
+        lable.textAlignment = UITextAlignmentCenter;
+        [self.navigationItem setTitleView:lable];
     }
     return self;
 }
@@ -32,11 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    UIView *tabBarBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 49)];
-//    tabBarBgView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"tabbar_bg"]];
-//    [self.view addSubview:tabBarBgView];
-//    [self.tabBar insertSubview:tabBarBgView atIndex:0];
+    
     // Testing MKNetworkKit
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.test" forKey:@"method"];
