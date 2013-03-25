@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) UIScrollView *adScrollView;
 @property (strong, nonatomic) UIPageControl *adPageControl;
+@property (strong, nonatomic) NSMutableArray *adArray;
 
 @end

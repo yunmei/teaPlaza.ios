@@ -20,6 +20,7 @@
 
 @synthesize adScrollView;
 @synthesize adPageControl;
+@synthesize adArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Ad Scroll View
+    
+    // Add AdScrollView
     [self.view addSubview:self.adScrollView];
     [self.view addSubview:self.adPageControl];
     
@@ -62,7 +64,7 @@
     [ApplicationDelegate.appEngine enqueueOperation: op];
 }
 
-- (void)clickBtn:(id)sender
+- (void)adClickAction:(id)sender
 {
 
 }
@@ -71,6 +73,34 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    self.adPageControl = nil;
+    self.adScrollView = nil;
+    self.adArray = nil;
+}
+
+- (void)showAdList
+{
+    int countAdList = [self.adArray count];
+    int i = 0;
+    if (countAdList > 0) {
+        for(UIView* subView in [self.adScrollView subviews])
+        {
+            [subView removeFromSuperview];
+        }
+        self.adScrollView.contentSize = CGSizeMake(countAdList * 320, 135);
+        for (NSMutableDictionary *o in self.adArray) {
+            UIButton *adImageBtn = [[UIButton alloc] initWithFrame:CGRectMake(320 * i, 0, 320, 135)];
+            [adImageBtn setTag:[[o objectForKey:@"id"] intValue]];
+            [adImageBtn addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
+            [YMGlobal loadImage:[o objectForKey:@"image"] andButton:adImageBtn andControlState:UIControlStateNormal];
+            [self.adScrollView addSubview:adImageBtn];
+        }
+        self.adPageControl.numberOfPages = countAdList;
+    }
 }
 
 // 初始化操作
