@@ -1,5 +1,6 @@
-#define API_HOSTNAME    @"teaplaza.chenapp.com"
+#define API_HOSTNAME    @"teaplaza.maimaicha.com"
 #define API_BASEURL     @"api"
+#define API_FORMAT      @"json"
 #define API_METHOD      @"GET"
 #define API_KEY         @"b4a4ef31a8b9acd866ef2dfb754ce3e6"
 #define SYS_VERSION     @"1.0"

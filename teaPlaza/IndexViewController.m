@@ -7,6 +7,10 @@
 //
 
 #import "IndexViewController.h"
+#import "MBProgressHUD.h"
+#import "YMGlobal.h"
+#import "AppDelegate.h"
+#import "SBJson.h"
 
 @interface IndexViewController ()
 
@@ -19,7 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Index", @"Index");
-        //self.tabBarItem.image = [UIImage imageNamed:@"Index"];
+        [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_index"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_index_unselected"]];
     }
     return self;
 }
@@ -29,6 +33,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // Testing MKNetworkKit
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.test" forKey:@"method"];
+    MKNetworkOperation* op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        NSLog(@"object:%@", object);
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
     // Testing Button
     UIButton *testButton = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 100, 50)];
     [testButton addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
