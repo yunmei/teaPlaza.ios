@@ -18,6 +18,9 @@
 
 @implementation IndexViewController
 
+@synthesize adScrollView;
+@synthesize adPageControl;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,6 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Ad Scroll View
+    [self.view addSubview:self.adScrollView];
+    [self.view addSubview:self.adPageControl];
     
     // Testing MKNetworkKit
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -54,19 +60,11 @@
         [HUD hide:YES];
     }];
     [ApplicationDelegate.appEngine enqueueOperation: op];
-    // Testing Button
-    UIButton *testButton = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 100, 50)];
-    [testButton addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [testButton setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:testButton];
 }
 
 - (void)clickBtn:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"com.maimaicha.chabaike://aaaaaaaaaatesttest"];
-    if (![[UIApplication sharedApplication]openURL:url]) {
-        NSLog(@"No Application");
-    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,4 +73,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+// 初始化操作
+- (UIScrollView *)adScrollView
+{
+    if (adScrollView == nil) {
+        adScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 135)];
+        adScrollView.contentSize = CGSizeMake(320, 135);
+        adScrollView.pagingEnabled = YES;
+        adScrollView.scrollEnabled = YES;
+        [adScrollView setShowsHorizontalScrollIndicator:NO];
+        [adScrollView setBackgroundColor:[UIColor grayColor]];
+        adScrollView.tag = 100;
+    }
+    return adScrollView;
+}
+- (UIPageControl *)adPageControl
+{
+    if (adPageControl == nil) {
+        adPageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(220, 105, 100, 30)];
+        adPageControl.currentPage = 1;
+        adPageControl.numberOfPages = 1;
+    }
+    return adPageControl;
+}
 @end

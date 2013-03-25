@@ -10,4 +10,7 @@
 
 @interface IndexViewController : UIViewController
 
+@property (strong, nonatomic) UIScrollView *adScrollView;
+@property (strong, nonatomic) UIPageControl *adPageControl;
+
 @end
