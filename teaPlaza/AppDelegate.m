@@ -17,11 +17,11 @@
     // Override point for customization after application launch.
     UINavigationController *indexNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
     UINavigationController *listNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
-    UINavigationController *myNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
+    UINavigationController *userNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
     UINavigationController *aboutNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[indexNavigationController, listNavigationController, myNavigationController, aboutNavigationController];
+    self.tabBarController.viewControllers = @[indexNavigationController, listNavigationController, userNavigationController, aboutNavigationController];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
