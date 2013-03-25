@@ -18,7 +18,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = NSLocalizedString(@"关于我们", @"关于我们");
+        [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_about_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_about"]];
+        [self.tabBarItem setTitle:@"关于我们"];
     }
     return self;
 }

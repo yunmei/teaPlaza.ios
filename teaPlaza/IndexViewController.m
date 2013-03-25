@@ -22,8 +22,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Index", @"Index");
-        [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_index"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_index_unselected"]];
+        self.title = NSLocalizedString(@"茶广场", @"茶广场");
+        [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_index_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_index"]];
+        [self.tabBarItem setTitle:@"茶广场"];
     }
     return self;
 }
@@ -32,7 +33,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+//    UIView *tabBarBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 49)];
+//    tabBarBgView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"tabbar_bg"]];
+//    [self.view addSubview:tabBarBgView];
+//    [self.tabBar insertSubview:tabBarBgView atIndex:0];
     // Testing MKNetworkKit
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.test" forKey:@"method"];

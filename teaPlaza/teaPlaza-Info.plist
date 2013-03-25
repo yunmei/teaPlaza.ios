@@ -20,6 +20,17 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.maimaicha.teaPlaza</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.maimaicha.teaPlaza</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -28,12 +39,23 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackTranslucent</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
 		<dict>
 			<key>Style</key>
 			<string>UIBarStyleDefault</string>
+			<key>TintColor</key>
+			<dict>
+				<key>Blue</key>
+				<real>0.49803921580314636</real>
+				<key>Green</key>
+				<real>0.49803921580314636</real>
+				<key>Red</key>
+				<real>0.49803921580314636</real>
+			</dict>
 			<key>Translucent</key>
 			<false/>
 		</dict>
@@ -43,17 +65,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.maimaicha.teaPlaza</string>
-			</array>
-			<key>CFBundleURLName</key>
-			<string>com.maimaicha.teaPlaza</string>
-		</dict>
 	</array>
 </dict>
 </plist>

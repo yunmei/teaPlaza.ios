@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "IndexViewController.h"
+#import "ListViewController.h"
+#import "UserViewController.h"
+#import "AboutViewController.h"
 
 @implementation AppDelegate
 
@@ -16,14 +19,23 @@
     self.appEngine = [[MKNetworkEngine alloc]initWithHostName:API_HOSTNAME customHeaderFields:nil];
     //[self.appEngine useCache];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    UINavigationController *indexNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
-    UINavigationController *listNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
-    UINavigationController *userNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
-    UINavigationController *aboutNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
     
+    // 定义navigationControllers
+    UINavigationController *indexNavigationController = [[UINavigationController alloc]initWithRootViewController:[[IndexViewController alloc] initWithNibName:@"IndexViewController" bundle:nil]];
+    UINavigationController *listNavigationController = [[UINavigationController alloc]initWithRootViewController:[[ListViewController alloc] initWithNibName:@"ListViewController" bundle:nil]];
+    UINavigationController *userNavigationController = [[UINavigationController alloc]initWithRootViewController:[[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil]];
+    UINavigationController *aboutNavigationController = [[UINavigationController alloc]initWithRootViewController:[[AboutViewController alloc] initWithNibName:@"AboutViewController" bundle:nil]];
+    
+    // 定义tabBarController
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[indexNavigationController, listNavigationController, userNavigationController, aboutNavigationController];
+    [self.tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar_bg"]];
+    [self.tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_bg_selected"]];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIFont systemFontOfSize:10.0], UITextAttributeFont,
+                                                       [UIColor colorWithRed:59/255.0 green:59/255.0 blue:59/255.0 alpha:1.0], UITextAttributeTextColor,
+                                                       nil] forState:UIControlStateNormal];
+    
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
