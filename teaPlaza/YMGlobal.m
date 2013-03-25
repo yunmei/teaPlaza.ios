@@ -27,4 +27,12 @@
         [button setBackgroundImage:fetchedImage forState:buttonState];
     }];
 }
+
++ (void)openOtherApp:(NSString *)urlScheme andUrlLink:(NSString *)urlLink
+{
+    NSURL *url = [NSURL URLWithString:urlScheme];
+    if (![[UIApplication sharedApplication]openURL:url]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlLink]];
+    }
+}
 @end
