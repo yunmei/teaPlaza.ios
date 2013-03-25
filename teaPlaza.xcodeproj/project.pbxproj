@@ -39,6 +39,7 @@
 		46D2F58E16FFE60A00507676 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F58016FFE60A00507676 /* SBJsonTokeniser.m */; };
 		46D2F58F16FFE60A00507676 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F58216FFE60A00507676 /* SBJsonUTF8Stream.m */; };
 		46D2F59016FFE60A00507676 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F58416FFE60A00507676 /* SBJsonWriter.m */; };
+		46D2F59516FFEDB500507676 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F59416FFEDB500507676 /* MBProgressHUD.m */; };
 		46D7B8D116FC339100F2AA5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D7B8D016FC339100F2AA5F /* UIKit.framework */; };
 		46D7B8D316FC339100F2AA5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D7B8D216FC339100F2AA5F /* Foundation.framework */; };
 		46D7B8D516FC339100F2AA5F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D7B8D416FC339100F2AA5F /* CoreGraphics.framework */; };
@@ -111,6 +112,8 @@
 		46D2F58316FFE60A00507676 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		46D2F58416FFE60A00507676 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		46D2F59116FFE69000507676 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		46D2F59316FFEDB500507676 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		46D2F59416FFEDB500507676 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		46D7B8CD16FC339100F2AA5F /* teaPlaza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teaPlaza.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46D7B8D016FC339100F2AA5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		46D7B8D216FC339100F2AA5F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,6 +159,7 @@
 		4634967A16FD775600525A9B /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				46D2F59216FFED9700507676 /* MBProgressHUD */,
 				46D2F56A16FFE60A00507676 /* SBJson */,
 				46D2F54616FFE23200507676 /* MKNetworkKit  */,
 			);
@@ -234,6 +238,15 @@
 				46D2F58416FFE60A00507676 /* SBJsonWriter.m */,
 			);
 			path = SBJson;
+			sourceTree = "<group>";
+		};
+		46D2F59216FFED9700507676 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				46D2F59316FFEDB500507676 /* MBProgressHUD.h */,
+				46D2F59416FFEDB500507676 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		46D7B8C416FC339100F2AA5F = {
@@ -398,6 +411,7 @@
 				46D2F58E16FFE60A00507676 /* SBJsonTokeniser.m in Sources */,
 				46D2F58F16FFE60A00507676 /* SBJsonUTF8Stream.m in Sources */,
 				46D2F59016FFE60A00507676 /* SBJsonWriter.m in Sources */,
+				46D2F59516FFEDB500507676 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
