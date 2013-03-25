@@ -10,6 +10,8 @@
 		4634967716FD773B00525A9B /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4634967516FD773B00525A9B /* IndexViewController.m */; };
 		4634967816FD773B00525A9B /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4634967616FD773B00525A9B /* IndexViewController.xib */; };
 		46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */; };
+		46BFE04717008DA500026A68 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BFE04517008DA500026A68 /* ContentViewController.m */; };
+		46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE04617008DA500026A68 /* ContentViewController.xib */; };
 		46D2F53A16FFE05300507676 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F53816FFE05300507676 /* ListViewController.m */; };
 		46D2F53B16FFE05300507676 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46D2F53916FFE05300507676 /* ListViewController.xib */; };
 		46D2F53F16FFE07900507676 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D2F53D16FFE07900507676 /* UserViewController.m */; };
@@ -68,6 +70,9 @@
 		4634967516FD773B00525A9B /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
 		4634967616FD773B00525A9B /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
 		46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
+		46BFE04417008DA500026A68 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		46BFE04517008DA500026A68 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		46BFE04617008DA500026A68 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
 		46D2F53716FFE05300507676 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		46D2F53816FFE05300507676 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		46D2F53916FFE05300507676 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -332,6 +337,9 @@
 				46D2F54116FFE12B00507676 /* AboutViewController.h */,
 				46D2F54216FFE12B00507676 /* AboutViewController.m */,
 				46D2F54316FFE12B00507676 /* AboutViewController.xib */,
+				46BFE04417008DA500026A68 /* ContentViewController.h */,
+				46BFE04517008DA500026A68 /* ContentViewController.m */,
+				46BFE04617008DA500026A68 /* ContentViewController.xib */,
 				46D7B8D716FC339100F2AA5F /* Supporting Files */,
 			);
 			path = teaPlaza;
@@ -423,6 +431,7 @@
 				46D2F5AB17002DAD00507676 /* tabbar_list_selected@2x.png in Resources */,
 				46D2F5AC17002DAD00507676 /* tabbar_user_selected@2x.png in Resources */,
 				46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */,
+				46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +471,7 @@
 				46D2F59016FFE60A00507676 /* SBJsonWriter.m in Sources */,
 				46D2F59516FFEDB500507676 /* MBProgressHUD.m in Sources */,
 				46D2F59816FFEDF600507676 /* YMGlobal.m in Sources */,
+				46BFE04717008DA500026A68 /* ContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
