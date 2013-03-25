@@ -48,6 +48,15 @@
     [self.view addSubview:self.adScrollView];
     [self.view addSubview:self.adPageControl];
     
+    // Add Middle Label
+    UILabel *middleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 135, 320, 45)];
+    middleLabel.backgroundColor = [UIColor clearColor];
+    middleLabel.font = [UIFont systemFontOfSize:16.0];
+    middleLabel.text = @"---------- 茶行业推荐应用 ----------";
+    middleLabel.textAlignment = UITextAlignmentCenter;
+    middleLabel.textColor = [UIColor colorWithRed:147/255.0 green:144/255.0 blue:144/255.0 alpha:1.0];
+    [self.view addSubview:middleLabel];
+    
     // Testing MKNetworkKit
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.test" forKey:@"method"];
