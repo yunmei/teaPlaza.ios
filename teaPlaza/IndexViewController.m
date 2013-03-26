@@ -22,6 +22,8 @@
 @synthesize adScrollView;
 @synthesize adPageControl;
 @synthesize adArray;
+@synthesize appArray;
+@synthesize appView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,14 +60,17 @@
     middleLabel.textColor = [UIColor colorWithRed:147/255.0 green:144/255.0 blue:144/255.0 alpha:1.0];
     [self.view addSubview:middleLabel];
     
-    // Testing MKNetworkKit
+    // Add AppView
+    [self.view addSubview:self.appView];
+    [self showAppList];
+    
+    // 开始网络请求 adArray
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getAdList" forKey:@"method"];
     MKNetworkOperation* op = [YMGlobal getOperation:params];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
-        NSLog(@"object:%@", object);
         if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
             self.adArray = [object objectForKey:@"result"];
             [self showAdList];
@@ -76,6 +81,30 @@
         [HUD hide:YES];
     }];
     [ApplicationDelegate.appEngine enqueueOperation: op];
+    // appArray
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    params = [NSMutableDictionary dictionaryWithObject:@"app.getAppList" forKey:@"method"];
+    if (self.IS_iPhone5) {
+        [params setObject:@"12" forKey:@"num"];
+    } else {
+        [params setObject:@"8" forKey:@"num"];
+    }
+    op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        NSLog(@"object:%@", object);
+        if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
+            self.appArray = [object objectForKey:@"result"];
+            [self showAppList];
+        }
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
+    
 }
 
 - (void)adClickAction:(id)sender
@@ -98,6 +127,8 @@
     self.adPageControl = nil;
     self.adScrollView = nil;
     self.adArray = nil;
+    self.appArray = nil;
+    self.appView = nil;
 }
 
 - (void)showAdList
@@ -119,6 +150,34 @@
             i++;
         }
         self.adPageControl.numberOfPages = countAdList;
+    }
+}
+
+- (void)showAppList
+{
+    int countAppList = [self.appArray count];
+    int showNum = self.IS_iPhone5 ? 12 : 8;
+    for (int i=0; i<showNum; i++) {
+        float x = 76 * (i%4) + 15;
+        float y = (int)(i/4) * 88;
+        UIButton *iconImageBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 61, 61)];
+        UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x-6, y+61, 75, 16)];
+        iconLabel.textAlignment = NSTextAlignmentCenter;
+        iconLabel.font = [UIFont systemFontOfSize:12.0];
+        //iconLabel.backgroundColor = [UIColor redColor];
+        iconLabel.text = @"开发中";
+        if (i < countAppList) {
+            NSMutableDictionary *o = [self.appArray objectAtIndex:i];
+            [iconImageBtn setTag:[[o objectForKey:@"id"] intValue]];
+            [iconImageBtn addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
+            [YMGlobal loadImage:[o objectForKey:@"icon"] andButton:iconImageBtn andControlState:UIControlStateNormal];
+            iconLabel.text = [o objectForKey:@"name"];
+        } else {
+            [iconImageBtn setBackgroundImage:[UIImage imageNamed:@"app"] forState:UIControlStateNormal];
+            iconLabel.textColor = [UIColor grayColor];
+        }
+        [self.appView addSubview:iconImageBtn];
+        [self.appView addSubview:iconLabel];
     }
 }
 
@@ -157,5 +216,35 @@
         adPageControl.numberOfPages = 1;
     }
     return adPageControl;
+}
+- (NSMutableArray *)adArray
+{
+    if (adArray == nil) {
+        adArray = [[NSMutableArray alloc]init];
+    }
+    return adArray;
+}
+- (NSMutableArray *)appArray
+{
+    if (appArray == nil) {
+        appArray = [[NSMutableArray alloc]init];
+    }
+    return appArray;
+}
+- (BOOL) IS_iPhone5
+{
+    _IS_iPhone5 = NO;
+    if ([UIScreen mainScreen].bounds.size.height > 480) {
+        _IS_iPhone5 = YES;
+    }
+    return _IS_iPhone5;
+}
+- (UIView *)appView
+{
+    if (appView == nil) {
+        appView = [[UIView alloc]initWithFrame:CGRectMake(0, 180, 320, [UIScreen mainScreen].bounds.size.height - 295)];
+        //appView.backgroundColor = [UIColor grayColor];
+    }
+    return appView;
 }
 @end
