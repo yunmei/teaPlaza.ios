@@ -62,7 +62,7 @@
     
     // Add AppView
     [self.view addSubview:self.appView];
-    [self showAppList];
+    //[self showAppList];
     
     // 开始网络请求 adArray
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -93,7 +93,6 @@
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
-        NSLog(@"object:%@", object);
         if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
             self.appArray = [object objectForKey:@"result"];
             [self showAppList];
@@ -157,6 +156,10 @@
 {
     int countAppList = [self.appArray count];
     int showNum = self.IS_iPhone5 ? 12 : 8;
+    for(UIView* subView in [self.appView subviews])
+    {
+        [subView removeFromSuperview];
+    }
     for (int i=0; i<showNum; i++) {
         float x = 76 * (i%4) + 15;
         float y = (int)(i/4) * 88;
@@ -164,7 +167,7 @@
         UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x-6, y+61, 75, 16)];
         iconLabel.textAlignment = NSTextAlignmentCenter;
         iconLabel.font = [UIFont systemFontOfSize:12.0];
-        //iconLabel.backgroundColor = [UIColor redColor];
+        iconLabel.backgroundColor = [UIColor clearColor];
         iconLabel.text = @"开发中";
         if (i < countAppList) {
             NSMutableDictionary *o = [self.appArray objectAtIndex:i];
@@ -243,7 +246,6 @@
 {
     if (appView == nil) {
         appView = [[UIView alloc]initWithFrame:CGRectMake(0, 180, 320, [UIScreen mainScreen].bounds.size.height - 295)];
-        //appView.backgroundColor = [UIColor grayColor];
     }
     return appView;
 }
