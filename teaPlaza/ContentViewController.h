@@ -12,5 +12,8 @@
 
 @property (strong, nonatomic) NSString *appId;
 @property (strong, nonatomic) UILabel *navLabel;
+@property (strong, nonatomic) NSString *urlschemes;
+@property (strong, nonatomic) NSString *ituneslink;
+@property (strong, nonatomic) UIWebView *contentWebView;
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "ContentViewController.h"
+#import "YMGlobal.h"
+#import "MBProgressHUD.h"
+#import "SBJson.h"
 
 @interface ContentViewController ()
 
@@ -16,6 +19,9 @@
 
 @synthesize appId;
 @synthesize navLabel;
+@synthesize ituneslink;
+@synthesize urlschemes;
+@synthesize contentWebView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,10 +35,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navLabel.text = @"内容页";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"打开应用" style:UIBarButtonItemStyleBordered target:self action:@selector(goToApp)];
     [self.navigationItem setTitleView:self.navLabel];
-    // Do any additional setup after loading the view from its nib.
+    self.navLabel.text = @"内容页";
     
+    // Add contentWebView
+    [self.view addSubview:self.contentWebView];
+    
+    // 开始网络请求 appContent
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getAppContent" forKey:@"method"];
+    MKNetworkOperation* op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        NSLog(@"object:%@",object);
+        if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
+            NSMutableDictionary *o = [object objectForKey:@"result"];
+            self.ituneslink = [o objectForKey:@"ituneslink"];
+            self.urlschemes = [o objectForKey:@"urlschemes"];
+            self.navLabel.text = [o objectForKey:@"name"];
+            [self.contentWebView loadHTMLString:[o objectForKey:@"html"] baseURL:nil];
+        }
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
+}
+
+- (void)goToApp
+{
+    [YMGlobal openOtherApp:self.urlschemes andUrlLink:self.ituneslink];
 }
 
 - (void)viewDidUnload
@@ -40,6 +75,9 @@
     [super viewDidUnload];
     self.appId = nil;
     self.navLabel = nil;
+    self.urlschemes = nil;
+    self.ituneslink = nil;
+    self.contentWebView = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,6 +94,20 @@
     }
     return appId;
 }
+- (NSString *)urlschemes
+{
+    if (urlschemes == nil) {
+        urlschemes = @"";
+    }
+    return urlschemes;
+}
+- (NSString *)ituneslink
+{
+    if (ituneslink == nil) {
+        ituneslink = @"";
+    }
+    return ituneslink;
+}
 - (UILabel *)navLabel
 {
     if (navLabel == nil) {
@@ -66,5 +118,13 @@
         navLabel.textAlignment = UITextAlignmentCenter;
     }
     return navLabel;
+}
+- (UIWebView *)contentWebView
+{
+    if (contentWebView == nil) {
+        contentWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 113)];
+        contentWebView.scrollView.bounces = NO;
+    }
+    return contentWebView;
 }
 @end
