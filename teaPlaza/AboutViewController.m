@@ -163,6 +163,12 @@
                                       shareImage:nil
                                  shareToSnsNames:[NSArray arrayWithObjects:UMShareToQzone,UMShareToRenren,UMShareToQzone,UMShareToDouban,UMShareToTencent,UMShareToSina,nil]
                                         delegate:nil];
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:SYS_APPLINK]];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        if (self.newVersion) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:SYS_APPLINK]];
+        }
     }
 }
 
