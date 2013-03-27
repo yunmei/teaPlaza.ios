@@ -10,6 +10,8 @@
 		4634967716FD773B00525A9B /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4634967516FD773B00525A9B /* IndexViewController.m */; };
 		4634967816FD773B00525A9B /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4634967616FD773B00525A9B /* IndexViewController.xib */; };
 		4682481C17013CF90051EFBA /* app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4682481B17013CF90051EFBA /* app@2x.png */; };
+		4682481E170290800051EFBA /* cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4682481D170290800051EFBA /* cell_bg@2x.png */; };
+		468248221702926D0051EFBA /* AppListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468248211702926D0051EFBA /* AppListCell.m */; };
 		46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */; };
 		46BFE04717008DA500026A68 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BFE04517008DA500026A68 /* ContentViewController.m */; };
 		46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE04617008DA500026A68 /* ContentViewController.xib */; };
@@ -71,6 +73,9 @@
 		4634967516FD773B00525A9B /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
 		4634967616FD773B00525A9B /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
 		4682481B17013CF90051EFBA /* app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app@2x.png"; sourceTree = "<group>"; };
+		4682481D170290800051EFBA /* cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg@2x.png"; sourceTree = "<group>"; };
+		468248201702926D0051EFBA /* AppListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListCell.h; sourceTree = "<group>"; };
+		468248211702926D0051EFBA /* AppListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppListCell.m; sourceTree = "<group>"; };
 		46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
 		46BFE04417008DA500026A68 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		46BFE04517008DA500026A68 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
@@ -181,6 +186,7 @@
 		4634967916FD774B00525A9B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4682481D170290800051EFBA /* cell_bg@2x.png */,
 				4682481B17013CF90051EFBA /* app@2x.png */,
 				46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */,
 				46D2F5A117002DAD00507676 /* tabbar_about@2x.png */,
@@ -208,6 +214,15 @@
 				46D2F54616FFE23200507676 /* MKNetworkKit  */,
 			);
 			name = Class;
+			sourceTree = "<group>";
+		};
+		4682481F170292280051EFBA /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				468248201702926D0051EFBA /* AppListCell.h */,
+				468248211702926D0051EFBA /* AppListCell.m */,
+			);
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 		46D2F54616FFE23200507676 /* MKNetworkKit  */ = {
@@ -343,6 +358,7 @@
 				46BFE04417008DA500026A68 /* ContentViewController.h */,
 				46BFE04517008DA500026A68 /* ContentViewController.m */,
 				46BFE04617008DA500026A68 /* ContentViewController.xib */,
+				4682481F170292280051EFBA /* CustomCell */,
 				46D7B8D716FC339100F2AA5F /* Supporting Files */,
 			);
 			path = teaPlaza;
@@ -436,6 +452,7 @@
 				46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */,
 				46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */,
 				4682481C17013CF90051EFBA /* app@2x.png in Resources */,
+				4682481E170290800051EFBA /* cell_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +493,7 @@
 				46D2F59516FFEDB500507676 /* MBProgressHUD.m in Sources */,
 				46D2F59816FFEDF600507676 /* YMGlobal.m in Sources */,
 				46BFE04717008DA500026A68 /* ContentViewController.m in Sources */,
+				468248221702926D0051EFBA /* AppListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
