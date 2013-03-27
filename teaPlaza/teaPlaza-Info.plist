@@ -2,10 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small@2x.png</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>茶广场</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -50,11 +57,11 @@
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
-				<real>0.49803921580314636</real>
+				<real>0.4980392158031464</real>
 				<key>Green</key>
-				<real>0.49803921580314636</real>
+				<real>0.4980392158031464</real>
 				<key>Red</key>
-				<real>0.49803921580314636</real>
+				<real>0.4980392158031464</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
