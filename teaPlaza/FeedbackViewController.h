@@ -10,4 +10,7 @@
 
 @interface FeedbackViewController : UIViewController
 
+@property (strong, nonatomic) UITextView *contentTextView;
+@property (strong, nonatomic) UITextField *contactTextField;
+
 @end

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "SBJson.h"
 #import "UMSocialSnsService.h"
+#import "FeedbackViewController.h"
 
 @interface AboutViewController ()
 
@@ -169,6 +170,10 @@
         if (self.newVersion) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:SYS_APPLINK]];
         }
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:nil action:nil];
+        FeedbackViewController *feedbackViewController = [[FeedbackViewController alloc]init];
+        [self.navigationController pushViewController:feedbackViewController animated:YES];
     }
 }
 
