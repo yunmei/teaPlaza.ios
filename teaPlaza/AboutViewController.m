@@ -159,7 +159,7 @@
 {
     if (indexPath.section == 1 && indexPath.row == 2) {
         [UMSocialSnsService presentSnsController:self
-                                          appKey:UM_APPKEY
+                                          appKey:UM_BAIKE_APPKEY
                                        shareText:UM_SHARETEXT
                                       shareImage:nil
                                  shareToSnsNames:[NSArray arrayWithObjects:UMShareToQzone,UMShareToRenren,UMShareToQzone,UMShareToDouban,UMShareToTencent,UMShareToSina,nil]

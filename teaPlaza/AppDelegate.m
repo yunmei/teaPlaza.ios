@@ -11,6 +11,7 @@
 #import "ListViewController.h"
 #import "UserViewController.h"
 #import "AboutViewController.h"
+#import "MobClick.h"
 
 @implementation AppDelegate
 
@@ -40,6 +41,9 @@
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    [MobClick startWithAppkey:UM_APPKEY];
+    [MobClick checkUpdate];
+    [MobClick setLogEnabled:NO];
     return YES;
 }
 
