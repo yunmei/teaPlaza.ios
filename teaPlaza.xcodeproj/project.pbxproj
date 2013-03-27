@@ -34,6 +34,7 @@
 		468248671702F7C80051EFBA /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 468248591702F7C80051EFBA /* UMSocialSDKResources.bundle */; };
 		4682486B1703102E0051EFBA /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 468248691703102D0051EFBA /* FeedbackViewController.m */; };
 		4682486C1703102E0051EFBA /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4682486A1703102E0051EFBA /* FeedbackViewController.xib */; };
+		46824871170338060051EFBA /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4682486F170338060051EFBA /* libMobClickLibrary.a */; };
 		46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */; };
 		46BFE04717008DA500026A68 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BFE04517008DA500026A68 /* ContentViewController.m */; };
 		46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE04617008DA500026A68 /* ContentViewController.xib */; };
@@ -141,6 +142,8 @@
 		468248681703102C0051EFBA /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		468248691703102D0051EFBA /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		4682486A1703102E0051EFBA /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
+		4682486F170338060051EFBA /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		46824870170338060051EFBA /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
 		46BFE04417008DA500026A68 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		46BFE04517008DA500026A68 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
@@ -245,6 +248,7 @@
 				4682485A1702F7C80051EFBA /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
 				468248651702F7C80051EFBA /* UMSocial_Sdk_1.8.0.a in Frameworks */,
 				468248661702F7C80051EFBA /* UMSocial_Sdk_Comment_1.8.0.a in Frameworks */,
+				46824871170338060051EFBA /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +287,7 @@
 		4634967A16FD775600525A9B /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4682486E170338060051EFBA /* UMAnalytics_Sdk */,
 				468248301702F7C80051EFBA /* UMSocial_Sdk_1.8.0 */,
 				46D2F59216FFED9700507676 /* MBProgressHUD */,
 				46D2F56A16FFE60A00507676 /* SBJson */,
@@ -420,6 +425,15 @@
 				4682486A1703102E0051EFBA /* FeedbackViewController.xib */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		4682486E170338060051EFBA /* UMAnalytics_Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				4682486F170338060051EFBA /* libMobClickLibrary.a */,
+				46824870170338060051EFBA /* MobClick.h */,
+			);
+			path = UMAnalytics_Sdk;
 			sourceTree = "<group>";
 		};
 		46D2F54616FFE23200507676 /* MKNetworkKit  */ = {
@@ -779,6 +793,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/teaPlaza/UMSocial_Sdk_1.8.0/frameworks/Wechat\"",
 					"\"$(SRCROOT)/teaPlaza/UMSocial_Sdk_1.8.0\"",
+					"\"$(SRCROOT)/teaPlaza/UMAnalytics_Sdk\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -795,6 +810,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/teaPlaza/UMSocial_Sdk_1.8.0/frameworks/Wechat\"",
 					"\"$(SRCROOT)/teaPlaza/UMSocial_Sdk_1.8.0\"",
+					"\"$(SRCROOT)/teaPlaza/UMAnalytics_Sdk\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
