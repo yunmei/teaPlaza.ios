@@ -32,6 +32,8 @@
 		468248651702F7C80051EFBA /* UMSocial_Sdk_1.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468248571702F7C80051EFBA /* UMSocial_Sdk_1.8.0.a */; };
 		468248661702F7C80051EFBA /* UMSocial_Sdk_Comment_1.8.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468248581702F7C80051EFBA /* UMSocial_Sdk_Comment_1.8.0.a */; };
 		468248671702F7C80051EFBA /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 468248591702F7C80051EFBA /* UMSocialSDKResources.bundle */; };
+		4682486B1703102E0051EFBA /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 468248691703102D0051EFBA /* FeedbackViewController.m */; };
+		4682486C1703102E0051EFBA /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4682486A1703102E0051EFBA /* FeedbackViewController.xib */; };
 		46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */; };
 		46BFE04717008DA500026A68 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BFE04517008DA500026A68 /* ContentViewController.m */; };
 		46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE04617008DA500026A68 /* ContentViewController.xib */; };
@@ -136,6 +138,9 @@
 		468248571702F7C80051EFBA /* UMSocial_Sdk_1.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = UMSocial_Sdk_1.8.0.a; sourceTree = "<group>"; };
 		468248581702F7C80051EFBA /* UMSocial_Sdk_Comment_1.8.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = UMSocial_Sdk_Comment_1.8.0.a; sourceTree = "<group>"; };
 		468248591702F7C80051EFBA /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
+		468248681703102C0051EFBA /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		468248691703102D0051EFBA /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		4682486A1703102E0051EFBA /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 		46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
 		46BFE04417008DA500026A68 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		46BFE04517008DA500026A68 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
@@ -392,6 +397,31 @@
 			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
+		4682486D1703103F0051EFBA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4634967416FD773B00525A9B /* IndexViewController.h */,
+				4634967516FD773B00525A9B /* IndexViewController.m */,
+				4634967616FD773B00525A9B /* IndexViewController.xib */,
+				46D2F53716FFE05300507676 /* ListViewController.h */,
+				46D2F53816FFE05300507676 /* ListViewController.m */,
+				46D2F53916FFE05300507676 /* ListViewController.xib */,
+				46D2F53C16FFE07900507676 /* UserViewController.h */,
+				46D2F53D16FFE07900507676 /* UserViewController.m */,
+				46D2F53E16FFE07900507676 /* UserViewController.xib */,
+				46D2F54116FFE12B00507676 /* AboutViewController.h */,
+				46D2F54216FFE12B00507676 /* AboutViewController.m */,
+				46D2F54316FFE12B00507676 /* AboutViewController.xib */,
+				46BFE04417008DA500026A68 /* ContentViewController.h */,
+				46BFE04517008DA500026A68 /* ContentViewController.m */,
+				46BFE04617008DA500026A68 /* ContentViewController.xib */,
+				468248681703102C0051EFBA /* FeedbackViewController.h */,
+				468248691703102D0051EFBA /* FeedbackViewController.m */,
+				4682486A1703102E0051EFBA /* FeedbackViewController.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		46D2F54616FFE23200507676 /* MKNetworkKit  */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,21 +540,7 @@
 			children = (
 				46D7B8DF16FC339100F2AA5F /* AppDelegate.h */,
 				46D7B8E016FC339100F2AA5F /* AppDelegate.m */,
-				4634967416FD773B00525A9B /* IndexViewController.h */,
-				4634967516FD773B00525A9B /* IndexViewController.m */,
-				4634967616FD773B00525A9B /* IndexViewController.xib */,
-				46D2F53716FFE05300507676 /* ListViewController.h */,
-				46D2F53816FFE05300507676 /* ListViewController.m */,
-				46D2F53916FFE05300507676 /* ListViewController.xib */,
-				46D2F53C16FFE07900507676 /* UserViewController.h */,
-				46D2F53D16FFE07900507676 /* UserViewController.m */,
-				46D2F53E16FFE07900507676 /* UserViewController.xib */,
-				46D2F54116FFE12B00507676 /* AboutViewController.h */,
-				46D2F54216FFE12B00507676 /* AboutViewController.m */,
-				46D2F54316FFE12B00507676 /* AboutViewController.xib */,
-				46BFE04417008DA500026A68 /* ContentViewController.h */,
-				46BFE04517008DA500026A68 /* ContentViewController.m */,
-				46BFE04617008DA500026A68 /* ContentViewController.xib */,
+				4682486D1703103F0051EFBA /* ViewController */,
 				4682481F170292280051EFBA /* CustomCell */,
 				46D7B8D716FC339100F2AA5F /* Supporting Files */,
 			);
@@ -634,6 +650,7 @@
 				468248631702F7C80051EFBA /* UMSnsAccountViewController.xib in Resources */,
 				468248641702F7C80051EFBA /* UMSShareListController.xib in Resources */,
 				468248671702F7C80051EFBA /* UMSocialSDKResources.bundle in Resources */,
+				4682486C1703102E0051EFBA /* FeedbackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +695,7 @@
 				4682485B1702F7C80051EFBA /* UMSocialBarView.m in Sources */,
 				4682485C1702F7C80051EFBA /* UMSocialIconActionSheet.m in Sources */,
 				4682485D1702F7C80051EFBA /* UMSocialSnsService.m in Sources */,
+				4682486B1703102E0051EFBA /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
