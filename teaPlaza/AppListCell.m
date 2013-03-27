@@ -39,6 +39,7 @@
         [appUserNumLabel setTextAlignment:NSTextAlignmentRight];
         [appUserNumLabel setFont:[UIFont systemFontOfSize:12.0]];
         [appUserNumLabel setBackgroundColor:[UIColor clearColor]];
+        [appUserNumLabel setTextColor:[UIColor grayColor]];
         [appUserNumLabel setText:@"0"];
     }
     return appUserNumLabel;
@@ -47,7 +48,7 @@
 {
     if (appDescLabel == nil) {
         appDescLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 140, 220, 30)];
-        [appDescLabel setFont:[UIFont systemFontOfSize:12.0]];
+        [appDescLabel setFont:[UIFont systemFontOfSize:14.0]];
         [appDescLabel setBackgroundColor:[UIColor clearColor]];
     }
     return appDescLabel;
