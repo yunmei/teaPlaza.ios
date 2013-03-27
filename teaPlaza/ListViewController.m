@@ -7,12 +7,21 @@
 //
 
 #import "ListViewController.h"
+#import "MBProgressHUD.h"
+#import "YMGlobal.h"
+#import "AppDelegate.h"
+#import "SBJson.h"
+#import "AppListCell.h"
+#import "ContentViewController.h"
 
 @interface ListViewController ()
 
 @end
 
 @implementation ListViewController
+
+@synthesize listTableView;
+@synthesize dataArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,7 +44,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Add listTableView
+    [self.view addSubview:self.listTableView];
+    
+    // 开始网络请求 dataArray
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getListInfo" forKey:@"method"];
+    MKNetworkOperation* op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
+            self.dataArray = [object objectForKey:@"result"];
+            [self.listTableView reloadData];
+        }
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.listTableView = nil;
+    self.dataArray = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,4 +79,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 186;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataArray count];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"listViewCell";
+    AppListCell *cell = (AppListCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(cell==nil) {
+        cell = [[AppListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        [cell addSubview:cell.appDescLabel];
+        [cell addSubview:cell.appUserNumLabel];
+        [cell addSubview:cell.appImageView];
+    }
+    NSMutableDictionary *dictionary = [self.dataArray objectAtIndex:indexPath.row];
+    cell.appDescLabel.text = [dictionary objectForKey:@"desc"];
+    cell.appUserNumLabel.text = [dictionary objectForKey:@"usenum"];
+    [YMGlobal loadImage:[dictionary objectForKey:@"listimage"] andImageView:cell.appImageView];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableDictionary *dictionary = [self.dataArray objectAtIndex:indexPath.row];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    ContentViewController *contentViewController = [[ContentViewController alloc]init];
+    contentViewController.appId = [dictionary objectForKey:@"id"];
+    [self.navigationController pushViewController:contentViewController animated:YES];
+}
+
+// 初始化操作
+- (UITableView *)listTableView
+{
+    if (listTableView == nil) {
+        listTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 113)];
+        listTableView.delegate = self;
+        listTableView.dataSource = self;
+        listTableView.separatorStyle = UITableViewCellAccessoryNone;
+    }
+    return listTableView;
+}
+- (NSMutableArray *)dataArray
+{
+    if (dataArray == nil) {
+        dataArray = [[NSMutableArray alloc]init];
+    }
+    return dataArray;
+}
 @end

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ListViewController : UIViewController
+@interface ListViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *listTableView;
+@property (strong, nonatomic) NSMutableArray *dataArray;
 
 @end
