@@ -12,6 +12,7 @@
 #import "YMGlobal.h"
 #import "AppDelegate.h"
 #import "SBJson.h"
+#import "UMSocialSnsService.h"
 
 @interface AboutViewController ()
 
@@ -152,6 +153,17 @@
         }
     
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row == 2) {
+        [UMSocialSnsService presentSnsController:self
+                                          appKey:UM_APPKEY
+                                       shareText:UM_SHARETEXT
+                                      shareImage:nil
+                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToQzone,UMShareToRenren,UMShareToQzone,UMShareToDouban,UMShareToTencent,UMShareToSina,nil]
+                                        delegate:nil];
+    }
 }
 
 - (UITableView *)contentTableView
