@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *loginTableView;
+@property (strong, nonatomic) UITextField *usernameTextField;
+@property (strong, nonatomic) UITextField *passwordTextField;
 
 @end
