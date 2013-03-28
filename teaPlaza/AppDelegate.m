@@ -11,6 +11,7 @@
 #import "ListViewController.h"
 #import "UserViewController.h"
 #import "AboutViewController.h"
+#import "LoginViewController.h"
 #import "MobClick.h"
 
 @implementation AppDelegate
@@ -44,6 +45,8 @@
     [MobClick startWithAppkey:UM_APPKEY];
     [MobClick checkUpdate];
     [MobClick setLogEnabled:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openLoginView:) name:@"INeedToLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRespondsLogin:) name:@"UserRespondsLogin" object:nil];
     return YES;
 }
 
@@ -94,4 +97,17 @@
 }
 */
 
+- (void)openLoginView:(NSNotification *)note
+{
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil]];
+    [self.tabBarController.selectedViewController presentModalViewController:navController animated:YES];
+}
+- (void)userRespondsLogin:(NSNotification *)note
+{
+    if ([[note userInfo]objectForKey:@"cancel"]) {
+        if (self.tabBarController.selectedIndex == 2) {
+            [self.tabBarController setSelectedIndex:0];
+        }
+    }
+}
 @end
