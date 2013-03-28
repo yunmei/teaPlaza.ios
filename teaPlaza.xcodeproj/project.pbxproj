@@ -36,6 +36,7 @@
 		4682486C1703102E0051EFBA /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4682486A1703102E0051EFBA /* FeedbackViewController.xib */; };
 		46824871170338060051EFBA /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4682486F170338060051EFBA /* libMobClickLibrary.a */; };
 		46824873170338920051EFBA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46824872170338920051EFBA /* libz.dylib */; };
+		468248761703DE0B0051EFBA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 468248751703DE0B0051EFBA /* User.m */; };
 		46BFE043170037E700026A68 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */; };
 		46BFE04717008DA500026A68 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BFE04517008DA500026A68 /* ContentViewController.m */; };
 		46BFE04817008DA500026A68 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BFE04617008DA500026A68 /* ContentViewController.xib */; };
@@ -146,6 +147,8 @@
 		4682486F170338060051EFBA /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		46824870170338060051EFBA /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		46824872170338920051EFBA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		468248741703DE0B0051EFBA /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		468248751703DE0B0051EFBA /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		46BFE042170037E700026A68 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
 		46BFE04417008DA500026A68 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		46BFE04517008DA500026A68 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
@@ -571,6 +574,8 @@
 				4634967A16FD775600525A9B /* Class */,
 				46D2F59616FFEDF600507676 /* YMGlobal.h */,
 				46D2F59716FFEDF600507676 /* YMGlobal.m */,
+				468248741703DE0B0051EFBA /* User.h */,
+				468248751703DE0B0051EFBA /* User.m */,
 				4634967916FD774B00525A9B /* Images */,
 				46D7B8D816FC339100F2AA5F /* teaPlaza-Info.plist */,
 				46D7B8D916FC339100F2AA5F /* InfoPlist.strings */,
@@ -714,6 +719,7 @@
 				4682485C1702F7C80051EFBA /* UMSocialIconActionSheet.m in Sources */,
 				4682485D1702F7C80051EFBA /* UMSocialSnsService.m in Sources */,
 				4682486B1703102E0051EFBA /* FeedbackViewController.m in Sources */,
+				468248761703DE0B0051EFBA /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
