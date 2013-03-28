@@ -30,8 +30,13 @@
 
 + (void)openOtherApp:(NSString *)urlScheme andUrlLink:(NSString *)urlLink
 {
-    NSURL *url = [NSURL URLWithString:urlScheme];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",urlScheme, @"://"]];
     if (![[UIApplication sharedApplication]openURL:url]) {
+        if ([urlLink isEqualToString:@""]) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"应用正在开发中" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            return ;
+        }
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlLink]];
     }
 }

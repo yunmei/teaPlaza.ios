@@ -45,6 +45,7 @@
     // 开始网络请求 appContent
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getAppContent" forKey:@"method"];
+    [params setObject:self.appId forKey:@"id"];
     MKNetworkOperation* op = [YMGlobal getOperation:params];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
