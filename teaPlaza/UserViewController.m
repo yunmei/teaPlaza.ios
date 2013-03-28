@@ -7,6 +7,7 @@
 //
 
 #import "UserViewController.h"
+#import "User.h"
 
 @interface UserViewController ()
 
@@ -30,6 +31,15 @@
         [self.navigationItem setTitleView:lable];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if ([User checkLogin]) {
+        NSLog(@"YES");
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"INeedToLogin" object:self];
+    }
 }
 
 - (void)viewDidLoad
