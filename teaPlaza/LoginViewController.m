@@ -9,6 +9,10 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "User.h"
+#import "MBProgressHUD.h"
+#import "YMGlobal.h"
+#import "AppDelegate.h"
+#import "SBJson.h"
 
 @interface LoginViewController ()
 
@@ -119,7 +123,43 @@
 
 - (void)userLogin
 {
-    NSLog(@"登陆");
+    if ([self.usernameTextField.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    if ([self.passwordTextField.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    // 开始网络请求
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.getSid" forKey:@"method"];
+    [params setObject:self.usernameTextField.text forKey:@"username"];
+    [params setObject:self.passwordTextField.text forKey:@"password"];
+    MKNetworkOperation* op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        NSLog(@"object:%@", object);
+        if ([[NSString stringWithFormat:@"%@", [object objectForKey:@"errorCode"]] isEqualToString:@"0"]) {
+            NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc]init];
+            [tempDictionary setObject:[[object objectForKey:@"result"] objectForKey:@"uid"] forKey:@"userId"];
+            [tempDictionary setObject:[[object objectForKey:@"result"] objectForKey:@"sid"] forKey:@"session"];
+            [tempDictionary setObject:self.usernameTextField.text forKey:@"username"];
+            [User saveUserInfo: tempDictionary];
+            [self dismissModalViewControllerAnimated:YES];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
 }
 
 - (void)userCancel
