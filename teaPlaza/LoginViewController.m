@@ -142,7 +142,6 @@
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
-        NSLog(@"object:%@", object);
         if ([[NSString stringWithFormat:@"%@", [object objectForKey:@"errorCode"]] isEqualToString:@"0"]) {
             NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc]init];
             [tempDictionary setObject:[[object objectForKey:@"result"] objectForKey:@"uid"] forKey:@"userId"];

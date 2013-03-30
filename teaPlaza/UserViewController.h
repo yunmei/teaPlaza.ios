@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserViewController : UIViewController
+@interface UserViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *contentTableView;
+@property (nonatomic, strong) NSMutableDictionary *contentDictionary;
 
 @end
