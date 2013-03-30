@@ -22,4 +22,9 @@
 // 获取用户Id
 + (NSString *)getUserId;
 
+// 获取用户名
++ (NSMutableDictionary *)getUsername;
+
+// 清除用户信息
++ (BOOL)clearUserInfo;
 @end

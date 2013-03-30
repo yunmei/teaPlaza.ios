@@ -13,7 +13,7 @@
 + (BOOL)checkLogin
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"session"] == nil) {
+    if ([defaults objectForKey:@"session"] == nil || [[defaults objectForKey:@"session"] isEqualToString:@""]) {
         return NO;
     }
     return YES;
@@ -39,5 +39,21 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:@"userId"];
+}
+
++ (NSMutableDictionary *)getUsername
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:@"username"];
+}
+
++ (BOOL)clearUserInfo
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"" forKey:@"session"];
+    [defaults setObject:@"" forKey:@"username"];
+    [defaults setObject:@"" forKey:@"userId"];
+    [defaults synchronize];
+    return YES;
 }
 @end
