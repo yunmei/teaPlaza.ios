@@ -7,6 +7,11 @@
 //
 
 #import "RegisterViewController.h"
+#import "User.h"
+#import "MBProgressHUD.h"
+#import "YMGlobal.h"
+#import "AppDelegate.h"
+#import "SBJson.h"
 
 @interface RegisterViewController ()
 
@@ -97,7 +102,75 @@
 
 - (void)userRegister
 {
-    NSLog(@"注册");
+    if ([self.usernameTextField.text isEqualToString:@""]) {
+        [self.usernameTextField becomeFirstResponder];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    if ([self.usernameTextField.text length] < 4 || [self.usernameTextField.text length] > 20) {
+        [self.usernameTextField becomeFirstResponder];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名的长度应该为4-20个字符！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alertView show];
+        return ;
+    }
+    if ([self.emailTextField.text isEqualToString:@""]) {
+        [self.emailTextField becomeFirstResponder];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邮箱不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    NSString *regEx = @"^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+    NSRange r = [self.emailTextField.text rangeOfString:regEx options:NSRegularExpressionSearch];
+    if (r.location == NSNotFound) {
+        [self.emailTextField becomeFirstResponder];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您填写的邮箱不正确！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+        [alertView show];
+        return ;
+    }
+    if ([self.passwordTextField.text isEqualToString:@""]) {
+        [self.passwordTextField becomeFirstResponder];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    if (![self.passwordTextField.text isEqualToString:self.rePasswordTextField.text]) {
+        [self.rePasswordTextField becomeFirstResponder];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"两次密码输入不一致" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return ;
+    }
+    // 开始网络请求
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"user.register" forKey:@"method"];
+    [params setObject:self.usernameTextField.text forKey:@"username"];
+    [params setObject:self.emailTextField.text forKey:@"email"];
+    [params setObject:self.passwordTextField.text forKey:@"password"];
+    MKNetworkOperation* op = [YMGlobal getOperation:params];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        SBJsonParser *parser = [[SBJsonParser alloc]init];
+        NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+        NSLog(@"object:%@", object);
+        if ([[NSString stringWithFormat:@"%@", [object objectForKey:@"errorCode"]] isEqualToString:@"0"]) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"注册成功，马上登陆！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else if ([[NSString stringWithFormat:@"%@", [object objectForKey:@"errorCode"]] isEqualToString:@"401"]) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名已存在，请换用户重试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        } else if ([[NSString stringWithFormat:@"%@", [object objectForKey:@"errorCode"]] isEqualToString:@"402"]) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邮箱已存在，请更换邮箱重试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"注册失败请重试！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+        [HUD hide:YES];
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"Error:%@", error);
+        [HUD hide:YES];
+    }];
+    [ApplicationDelegate.appEngine enqueueOperation: op];
 }
 
 // 初始化操作
