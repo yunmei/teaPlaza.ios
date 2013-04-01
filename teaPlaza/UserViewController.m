@@ -63,6 +63,7 @@
                 [self.contentDictionary setObject:[[object objectForKey:@"result"] objectForKey:@"diamond"] forKey:@"diamond"];
                 [self.contentTableView reloadData];
             } else if ([[object objectForKey:@"errorCode"] isEqualToString:@"2"]) {
+                [User clearUserInfo];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"INeedToLogin" object:self];
             }
             [HUD hide:YES];

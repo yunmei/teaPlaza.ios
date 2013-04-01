@@ -50,7 +50,6 @@
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
-        NSLog(@"object:%@",object);
         if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
             NSMutableDictionary *o = [object objectForKey:@"result"];
             self.ituneslink = [o objectForKey:@"ituneslink"];
