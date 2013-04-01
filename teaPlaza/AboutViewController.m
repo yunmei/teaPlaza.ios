@@ -114,7 +114,7 @@
                 [infoLabel setBackgroundColor:[UIColor clearColor]];
                 infoLabel.numberOfLines = 0;
                 infoLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-                infoLabel.text = @"　　茶广场是山东华夏茶联茶业有限公司开发的一款茶行业多功能平台软件，包括茶百科、开心茶园、单店ERP、买买茶等多款茶行业应用。即刻下载，与众多茶叶爱好者（茶叶经营者）共同体验精品应用！";
+                infoLabel.text = @"　　茶广场是山东华夏茶联茶业有限公司开发的一款茶行业多功能平台软件，包括茶百科、快乐茶农、单店ERP、买买茶等多款茶行业应用。即刻下载，与众多茶叶爱好者（茶叶经营者）共同体验精品应用！";
                 [cell addSubview:infoLabel];
             } else if (indexPath.row == 1) {
                 UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 30)];
