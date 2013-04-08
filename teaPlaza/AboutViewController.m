@@ -133,7 +133,7 @@
                 UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 30)];
                 [label setFont:[UIFont systemFontOfSize:14.0]];
                 [label setBackgroundColor:[UIColor clearColor]];
-                label.text = @"喜欢我们，打5星鼓励";
+                label.text = @"喜欢我们，打分鼓励";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 [cell addSubview:label];
             } else if (indexPath.row == 1) {
