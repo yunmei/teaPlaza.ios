@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"打开应用" style:UIBarButtonItemStyleBordered target:self action:@selector(goToApp)];
+    
     [self.navigationItem setTitleView:self.navLabel];
     self.navLabel.text = @"内容页";
     
@@ -56,6 +56,9 @@
             self.urlschemes = [o objectForKey:@"urlschemes"];
             self.navLabel.text = [o objectForKey:@"name"];
             [self.contentWebView loadHTMLString:[o objectForKey:@"html"] baseURL:nil];
+            if (![self.ituneslink isEqualToString:@""]) {
+                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"打开应用" style:UIBarButtonItemStyleBordered target:self action:@selector(goToApp)];
+            }
         }
         [HUD hide:YES];
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {

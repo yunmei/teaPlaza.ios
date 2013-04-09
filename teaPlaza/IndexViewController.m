@@ -168,7 +168,7 @@
         iconLabel.textAlignment = NSTextAlignmentCenter;
         iconLabel.font = [UIFont systemFontOfSize:12.0];
         iconLabel.backgroundColor = [UIColor clearColor];
-        iconLabel.text = @"开发中";
+        iconLabel.text = @"期待加盟";
         if (i < countAppList) {
             NSMutableDictionary *o = [self.appArray objectAtIndex:i];
             [iconImageBtn setTag:[[o objectForKey:@"id"] intValue]];

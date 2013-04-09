@@ -37,7 +37,7 @@
     }
     if (![[UIApplication sharedApplication]openURL:url]) {
         if ([urlLink isEqualToString:@""]) {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"应用正在开发中" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"应用正在加盟中" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
             return ;
         }
