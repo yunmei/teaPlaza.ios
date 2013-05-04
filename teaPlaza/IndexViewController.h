@@ -16,5 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *appArray;
 @property (nonatomic) BOOL IS_iPhone5;
 @property (strong, nonatomic) UIView *appView;
+@property (strong, nonatomic) UIPageControl *appControl;
+@property (strong, nonatomic) UIScrollView *appScrollView;
 
 @end

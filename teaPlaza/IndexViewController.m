@@ -24,7 +24,8 @@
 @synthesize adArray;
 @synthesize appArray;
 @synthesize appView;
-
+@synthesize appControl = _appControl;
+@synthesize appScrollView = _appScrollView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -59,10 +60,14 @@
     middleLabel.textAlignment = UITextAlignmentCenter;
     middleLabel.textColor = [UIColor colorWithRed:147/255.0 green:144/255.0 blue:144/255.0 alpha:1.0];
     [self.view addSubview:middleLabel];
-    
+    UIImageView *pageControlBackView = [[UIImageView alloc]initWithFrame:CGRectMake(128, 164+([UIScreen mainScreen].bounds.size.height-295), 64, 12)];
+    [pageControlBackView setImage:[UIImage imageNamed:@"pageControlBg.png"]];
+
     // Add AppView
-    [self.view addSubview:self.appView];
-    //[self showAppList];
+    [self.view addSubview:self.appScrollView];
+        [self.view addSubview:pageControlBackView];
+    [self.view addSubview:self.appControl];
+    [self addappList];
     
     // 开始网络请求 adArray
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -83,19 +88,20 @@
     [ApplicationDelegate.appEngine enqueueOperation: op];
     // appArray
     HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    params = [NSMutableDictionary dictionaryWithObject:@"app.getAppList" forKey:@"method"];
-    if (self.IS_iPhone5) {
-        [params setObject:@"12" forKey:@"num"];
-    } else {
-        [params setObject:@"8" forKey:@"num"];
-    }
+    params = [NSMutableDictionary dictionaryWithObject:@"app.getAppChangeList" forKey:@"method"];
+//    if (self.IS_iPhone5) {
+//        [params setObject:@"12" forKey:@"num"];
+//    } else {
+//        [params setObject:@"8" forKey:@"num"];
+//    }
+    [params setObject:@"12" forKey:@"num"];
     op = [YMGlobal getOperation:params];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         SBJsonParser *parser = [[SBJsonParser alloc]init];
         NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
         if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
             self.appArray = [object objectForKey:@"result"];
-            [self showAppList];
+            [self addappList];
         }
         [HUD hide:YES];
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
@@ -184,6 +190,35 @@
     }
 }
 
+-(void)addappList
+{
+    int countApp = [self.appArray count];
+    for(int i=0;i<countApp;i++)
+    {
+        NSLog(@"111%@",[self.appArray objectAtIndex:i]);
+        float x = 136 * floorf(i/2) +16*(floorf(i/2)+1);
+        float y = 71 * (i%2)+14*((i%2)+1);
+        if(i%2 == 0)
+        {
+            y = 71 * (i%2)+1*((i%2)+1);
+        }else{
+            y = 71 * (i%2)+10*((i%2)+1);
+        }
+        NSMutableDictionary *o = [self.appArray objectAtIndex:i];
+        UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 136, 71)];
+        UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x+30, y+71, 75, 16)];
+        [iconLabel setBackgroundColor:[UIColor clearColor]];
+        iconLabel.textAlignment = NSTextAlignmentCenter;
+        [iconLabel setFont:[UIFont systemFontOfSize:12.0]];
+        [imageButton setTag:[[o objectForKey:@"id"] intValue]];
+        [imageButton addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
+        [YMGlobal loadImage:[o objectForKey:@"icon"] andButton:imageButton andControlState:UIControlStateNormal];
+        iconLabel.text = [o objectForKey:@"name"];
+        [self.appScrollView addSubview:imageButton];
+        [self.appScrollView addSubview:iconLabel];
+    }
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.tag == 100) {
@@ -193,6 +228,14 @@
             page = page+1;
         }
         [self.adPageControl setCurrentPage:page];
+    }else if (scrollView.tag == 11){
+        int offset = scrollView.contentOffset.x;
+        int page = (int)(offset/320);
+        if(offset%320>160)
+        {
+            page +=1;
+        }
+        [self.appControl setCurrentPage:page];
     }
 }
 
@@ -215,7 +258,7 @@
 {
     if (adPageControl == nil) {
         adPageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(220, 105, 100, 30)];
-        adPageControl.currentPage = 1;
+        adPageControl.currentPage = 0;
         adPageControl.numberOfPages = 1;
     }
     return adPageControl;
@@ -248,5 +291,33 @@
         appView = [[UIView alloc]initWithFrame:CGRectMake(0, 180, 320, [UIScreen mainScreen].bounds.size.height - 295)];
     }
     return appView;
+}
+
+-(UIPageControl *)appControl
+{
+    if(_appControl == nil)
+    {
+        _appControl = [[UIPageControl alloc]initWithFrame:CGRectMake(110, 155+([UIScreen mainScreen].bounds.size.height-295), 100, 30)];
+        [_appControl setCurrentPage:0];
+        [_appControl setNumberOfPages:3];
+    }
+    return _appControl;
+}
+
+-(UIScrollView *)appScrollView
+{
+    if(_appScrollView == nil)
+    {
+        _appScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 180, 320, [UIScreen mainScreen].bounds.size.height-295 )];
+        _appScrollView.backgroundColor = [UIColor whiteColor];
+        _appScrollView.delegate = self;
+        _appScrollView.contentSize = CGSizeMake(960, [UIScreen mainScreen].bounds.size.height-295);
+        [_appScrollView setShowsHorizontalScrollIndicator:NO];
+        _appScrollView.tag = 11;
+        _appScrollView.bounces = YES;
+        _appScrollView.pagingEnabled = YES;
+        //_appScrollView.scrollEnabled = YES;
+    }
+    return _appScrollView;
 }
 @end

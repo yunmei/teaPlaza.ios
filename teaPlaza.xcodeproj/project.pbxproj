@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4634967716FD773B00525A9B /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4634967516FD773B00525A9B /* IndexViewController.m */; };
 		4634967816FD773B00525A9B /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4634967616FD773B00525A9B /* IndexViewController.xib */; };
+		4665D93C17349C6100CE8714 /* pageControlBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4665D93B17349C6100CE8714 /* pageControlBg.png */; };
 		4682481C17013CF90051EFBA /* app@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4682481B17013CF90051EFBA /* app@2x.png */; };
 		4682481E170290800051EFBA /* cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4682481D170290800051EFBA /* cell_bg@2x.png */; };
 		468248221702926D0051EFBA /* AppListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 468248211702926D0051EFBA /* AppListCell.m */; };
@@ -101,6 +102,7 @@
 		4634967416FD773B00525A9B /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
 		4634967516FD773B00525A9B /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
 		4634967616FD773B00525A9B /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
+		4665D93B17349C6100CE8714 /* pageControlBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageControlBg.png; sourceTree = "<group>"; };
 		4682481B17013CF90051EFBA /* app@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app@2x.png"; sourceTree = "<group>"; };
 		4682481D170290800051EFBA /* cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg@2x.png"; sourceTree = "<group>"; };
 		468248201702926D0051EFBA /* AppListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListCell.h; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		4634967916FD774B00525A9B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4665D93B17349C6100CE8714 /* pageControlBg.png */,
 				468248231702C9A30051EFBA /* Icon-Small.png */,
 				468248241702C9A30051EFBA /* Icon-Small@2x.png */,
 				468248251702C9A30051EFBA /* Icon.png */,
@@ -692,6 +695,7 @@
 				4682486C1703102E0051EFBA /* FeedbackViewController.xib in Resources */,
 				4682487B1703EAC00051EFBA /* LoginViewController.xib in Resources */,
 				46824880170414F50051EFBA /* RegisterViewController.xib in Resources */,
+				4665D93C17349C6100CE8714 /* pageControlBg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,7 +808,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XianHe Chen (6FXCE4M43E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XianHe Chen (6FXCE4M43E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TeaUNi(Shandong) Company Limited";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -813,7 +817,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "7552C167-2B94-4579-A5D1-F00B2DAFA931";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7552C167-2B94-4579-A5D1-F00B2DAFA931";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C5F4319-5DDA-41FA-B867-047DE0124D7C";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
