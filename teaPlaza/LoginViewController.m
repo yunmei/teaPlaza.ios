@@ -34,7 +34,7 @@
         lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
         lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
         lable.text = self.title;
-        lable.textAlignment = UITextAlignmentCenter;
+        lable.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem setTitleView:lable];
         
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:@"登陆"
@@ -55,7 +55,8 @@
 {
     if([User checkLogin])
     {
-        [self dismissModalViewControllerAnimated:YES];
+        //[self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -148,7 +149,8 @@
             [tempDictionary setObject:[[object objectForKey:@"result"] objectForKey:@"sid"] forKey:@"session"];
             [tempDictionary setObject:self.usernameTextField.text forKey:@"username"];
             [User saveUserInfo: tempDictionary];
-            [self dismissModalViewControllerAnimated:YES];
+            //[self dismissModalViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
@@ -164,7 +166,8 @@
 - (void)userCancel
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UserRespondsLogin" object:self userInfo:[NSMutableDictionary dictionaryWithObject:@"cancel" forKey:@"cancel"]];
-    [self dismissModalViewControllerAnimated:YES];
+   // [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 // 初始化操作
 - (UITableView *)loginTableView

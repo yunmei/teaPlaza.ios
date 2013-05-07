@@ -100,7 +100,8 @@
 - (void)openLoginView:(NSNotification *)note
 {
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil]];
-    [self.tabBarController.selectedViewController presentModalViewController:navController animated:YES];
+    //[self.tabBarController.selectedViewController presentModalViewController:navController animated:YES];
+    [self.tabBarController.selectedViewController presentViewController:navController animated:YES completion:nil];
 }
 - (void)userRespondsLogin:(NSNotification *)note
 {

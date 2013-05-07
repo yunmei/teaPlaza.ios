@@ -35,7 +35,7 @@
         lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
         lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
         lable.text = self.title;
-        lable.textAlignment = UITextAlignmentCenter;
+        lable.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem setTitleView:lable];
     }
     return self;
@@ -113,7 +113,7 @@
                 [infoLabel setFont:[UIFont systemFontOfSize:14.0]];
                 [infoLabel setBackgroundColor:[UIColor clearColor]];
                 infoLabel.numberOfLines = 0;
-                infoLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+                infoLabel.lineBreakMode = NSLineBreakByCharWrapping;
                 infoLabel.text = @"　　茶广场是山东华夏茶联茶业有限公司开发的一款茶行业多功能平台软件，包括茶百科、快乐茶农、单店ERP、买买茶等多款茶行业应用。即刻下载，与众多茶叶爱好者（茶叶经营者）共同体验精品应用！";
                 [cell addSubview:infoLabel];
             } else if (indexPath.row == 1) {

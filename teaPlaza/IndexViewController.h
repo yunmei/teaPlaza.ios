@@ -18,5 +18,5 @@
 @property (strong, nonatomic) UIView *appView;
 @property (strong, nonatomic) UIPageControl *appControl;
 @property (strong, nonatomic) UIScrollView *appScrollView;
-
+@property (strong, nonatomic) UIImageView *addImageView;
 @end

@@ -75,7 +75,7 @@
         _statusLabel.font =[UIFont systemFontOfSize:13];
         _statusLabel.text = nil;
         _statusLabel.textColor = [UIColor lightGrayColor];
-        _statusLabel.textAlignment = UITextAlignmentCenter;
+        _statusLabel.textAlignment = NSTextAlignmentCenter;
         _statusLabel.alpha = 0;
         [self addSubview:_statusLabel];
     }

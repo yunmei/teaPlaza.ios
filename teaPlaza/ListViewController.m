@@ -35,7 +35,7 @@
         lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
         lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
         lable.text = self.title;
-        lable.textAlignment = UITextAlignmentCenter;
+        lable.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem setTitleView:lable];
     }
     return self;

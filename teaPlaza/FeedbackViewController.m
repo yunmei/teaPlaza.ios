@@ -30,7 +30,7 @@
         lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
         lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
         lable.text = self.title;
-        lable.textAlignment = UITextAlignmentCenter;
+        lable.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem setTitleView:lable];
     }
     return self;
@@ -45,7 +45,7 @@
     [infoLabel setFont:[UIFont systemFontOfSize:14.0]];
     [infoLabel setBackgroundColor:[UIColor clearColor]];
     infoLabel.numberOfLines = 0;
-    infoLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+    infoLabel.lineBreakMode = NSLineBreakByCharWrapping;
     infoLabel.text = @"欢迎提出宝贵意见和建议，您留下的每个字都将用来改善我们的软件";
     [self.view addSubview:infoLabel];
     [self.view addSubview:self.contactTextField];

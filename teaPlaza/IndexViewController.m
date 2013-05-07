@@ -26,6 +26,7 @@
 @synthesize appView;
 @synthesize appControl = _appControl;
 @synthesize appScrollView = _appScrollView;
+@synthesize addImageView = _addImageView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,7 +39,7 @@
         lable.textColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0];
         lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
         lable.text = self.title;
-        lable.textAlignment = UITextAlignmentCenter;
+        lable.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem setTitleView:lable];
     }
     return self;
@@ -51,23 +52,21 @@
     // Add AdScrollView
     [self.view addSubview:self.adScrollView];
     [self.view addSubview:self.adPageControl];
-    
     // Add Middle Label
     UILabel *middleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 135, 320, 45)];
     middleLabel.backgroundColor = [UIColor clearColor];
     middleLabel.font = [UIFont systemFontOfSize:16.0];
     middleLabel.text = @"---------- 茶行业推荐应用 ----------";
-    middleLabel.textAlignment = UITextAlignmentCenter;
+    middleLabel.textAlignment = NSTextAlignmentCenter;
     middleLabel.textColor = [UIColor colorWithRed:147/255.0 green:144/255.0 blue:144/255.0 alpha:1.0];
     [self.view addSubview:middleLabel];
-    UIImageView *pageControlBackView = [[UIImageView alloc]initWithFrame:CGRectMake(128, 164+([UIScreen mainScreen].bounds.size.height-295), 64, 12)];
+    UIImageView *pageControlBackView = [[UIImageView alloc]initWithFrame:CGRectMake(128, 349, 64, 12)];
     [pageControlBackView setImage:[UIImage imageNamed:@"pageControlBg.png"]];
-
     // Add AppView
     [self.view addSubview:self.appScrollView];
+    NSLog(@"%f",self.appScrollView.frame.size.height);
         [self.view addSubview:pageControlBackView];
     [self.view addSubview:self.appControl];
-    [self addappList];
     
     // 开始网络请求 adArray
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -110,6 +109,26 @@
     }];
     [ApplicationDelegate.appEngine enqueueOperation: op];
     
+    //如果是iphone5的高度，则加上一张图片遮盖空白
+    if([UIScreen mainScreen].bounds.size.height > 480)
+    {
+        [self.view addSubview:self.addImageView];
+        params = [NSMutableDictionary dictionaryWithObject:@"app.getImageAdd" forKey:@"method"];
+        op = [YMGlobal getOperation:params];
+        [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+            NSLog(@"responseString%@",[completedOperation responseString]);
+            SBJsonParser *parser = [[SBJsonParser alloc]init];
+            NSMutableDictionary *object = [parser objectWithData:[completedOperation responseData]];
+            if ([[object objectForKey:@"errorCode"] isEqualToString:@"0"]) {
+                NSArray *data = [object objectForKey:@"result"];
+                NSString *imageUrlString = [[data objectAtIndex:0] objectForKey:@"imageUrl"];
+                [YMGlobal loadImage:imageUrlString andImageView:self.addImageView];
+            }
+        } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+            NSLog(@"Error:%@", error);
+        }];
+        [ApplicationDelegate.appEngine enqueueOperation: op];
+    }
 }
 
 - (void)adClickAction:(id)sender
@@ -158,44 +177,44 @@
     }
 }
 
-- (void)showAppList
-{
-    int countAppList = [self.appArray count];
-    int showNum = self.IS_iPhone5 ? 12 : 8;
-    for(UIView* subView in [self.appView subviews])
-    {
-        [subView removeFromSuperview];
-    }
-    for (int i=0; i<showNum; i++) {
-        float x = 76 * (i%4) + 15;
-        float y = (int)(i/4) * 88;
-        UIButton *iconImageBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 61, 61)];
-        UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x-6, y+61, 75, 16)];
-        iconLabel.textAlignment = NSTextAlignmentCenter;
-        iconLabel.font = [UIFont systemFontOfSize:12.0];
-        iconLabel.backgroundColor = [UIColor clearColor];
-        iconLabel.text = @"期待加盟";
-        if (i < countAppList) {
-            NSMutableDictionary *o = [self.appArray objectAtIndex:i];
-            [iconImageBtn setTag:[[o objectForKey:@"id"] intValue]];
-            [iconImageBtn addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
-            [YMGlobal loadImage:[o objectForKey:@"icon"] andButton:iconImageBtn andControlState:UIControlStateNormal];
-            iconLabel.text = [o objectForKey:@"name"];
-        } else {
-            [iconImageBtn setBackgroundImage:[UIImage imageNamed:@"app"] forState:UIControlStateNormal];
-            iconLabel.textColor = [UIColor grayColor];
-        }
-        [self.appView addSubview:iconImageBtn];
-        [self.appView addSubview:iconLabel];
-    }
-}
+//- (void)showAppList
+//{
+//    int countAppList = [self.appArray count];
+//    int showNum = self.IS_iPhone5 ? 12 : 8;
+//    for(UIView* subView in [self.appView subviews])
+//    {
+//        [subView removeFromSuperview];
+//    }
+//    for (int i=0; i<showNum; i++) {
+//        float x = 76 * (i%4) + 15;
+//        float y = (int)(i/4) * 88;
+//        UIButton *iconImageBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 61, 61)];
+//        UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x-6, y+61, 75, 16)];
+//        iconLabel.textAlignment = NSTextAlignmentCenter;
+//        iconLabel.font = [UIFont systemFontOfSize:12.0];
+//        iconLabel.backgroundColor = [UIColor clearColor];
+//        iconLabel.text = @"期待加盟";
+//        if (i < countAppList) {
+//            NSMutableDictionary *o = [self.appArray objectAtIndex:i];
+//            [iconImageBtn setTag:[[o objectForKey:@"id"] intValue]];
+//            //[iconImageBtn setImage:[UIImage imageNamed:@"empty.png"] forState:UIControlStateNormal];
+//            [iconImageBtn addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
+//            [YMGlobal loadImage:[o objectForKey:@"icon"] andButton:iconImageBtn andControlState:UIControlStateNormal];
+//            iconLabel.text = [o objectForKey:@"name"];
+//        } else {
+//            [iconImageBtn setBackgroundImage:[UIImage imageNamed:@"empty.png"] forState:UIControlStateNormal];
+//            iconLabel.textColor = [UIColor grayColor];
+//        }
+//        [self.appView addSubview:iconImageBtn];
+//        [self.appView addSubview:iconLabel];
+//    }
+//}
 
 -(void)addappList
 {
     int countApp = [self.appArray count];
     for(int i=0;i<countApp;i++)
     {
-        NSLog(@"111%@",[self.appArray objectAtIndex:i]);
         float x = 136 * floorf(i/2) +16*(floorf(i/2)+1);
         float y = 71 * (i%2)+14*((i%2)+1);
         if(i%2 == 0)
@@ -211,11 +230,40 @@
         iconLabel.textAlignment = NSTextAlignmentCenter;
         [iconLabel setFont:[UIFont systemFontOfSize:12.0]];
         [imageButton setTag:[[o objectForKey:@"id"] intValue]];
+        //[imageButton setImage:[UIImage imageNamed:@"empty.png"] forState:UIControlStateNormal];
         [imageButton addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
         [YMGlobal loadImage:[o objectForKey:@"icon"] andButton:imageButton andControlState:UIControlStateNormal];
         iconLabel.text = [o objectForKey:@"name"];
         [self.appScrollView addSubview:imageButton];
         [self.appScrollView addSubview:iconLabel];
+    }
+    
+    if(countApp < 12)
+    {
+        for(int i=countApp;i<12;i++)
+        {
+            float x = 136 * floorf(i/2) +20*(floorf(i/2)+1);
+            float y = 71 * (i%2)+14*((i%2)+1);
+            if(i%2 == 0)
+            {
+                y = 71 * (i%2)+1*((i%2)+1);
+            }else{
+                y = 71 * (i%2)+10*((i%2)+1);
+            }
+            if(i>7)
+                x +=8;
+            UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 136, 71)];
+            UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(x+30, y+71, 75, 16)];
+            [iconLabel setBackgroundColor:[UIColor clearColor]];
+            iconLabel.textAlignment = NSTextAlignmentCenter;
+            [iconLabel setFont:[UIFont systemFontOfSize:12.0]];
+            [imageButton setImage:[UIImage imageNamed:@"empty.png"] forState:UIControlStateNormal];
+            //[imageButton addTarget:self action:@selector(adClickAction:) forControlEvents:UIControlEventTouchUpInside];
+            iconLabel.text = @"期待加盟";
+            [self.appScrollView addSubview:imageButton];
+            [self.appScrollView addSubview:iconLabel];
+        }
+        
     }
 }
 
@@ -297,7 +345,7 @@
 {
     if(_appControl == nil)
     {
-        _appControl = [[UIPageControl alloc]initWithFrame:CGRectMake(110, 155+([UIScreen mainScreen].bounds.size.height-295), 100, 30)];
+        _appControl = [[UIPageControl alloc]initWithFrame:CGRectMake(110, 155+185, 100, 30)];
         [_appControl setCurrentPage:0];
         [_appControl setNumberOfPages:3];
     }
@@ -308,10 +356,10 @@
 {
     if(_appScrollView == nil)
     {
-        _appScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 180, 320, [UIScreen mainScreen].bounds.size.height-295 )];
+        _appScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 180, 320, 185)];
         _appScrollView.backgroundColor = [UIColor whiteColor];
         _appScrollView.delegate = self;
-        _appScrollView.contentSize = CGSizeMake(960, [UIScreen mainScreen].bounds.size.height-295);
+        _appScrollView.contentSize = CGSizeMake(960, 185);
         [_appScrollView setShowsHorizontalScrollIndicator:NO];
         _appScrollView.tag = 11;
         _appScrollView.bounces = YES;
@@ -319,5 +367,15 @@
         //_appScrollView.scrollEnabled = YES;
     }
     return _appScrollView;
+}
+
+-(UIImageView *)addImageView
+{
+    if(_addImageView == nil)
+    {
+        _addImageView = [[UIImageView alloc]init];
+        [_addImageView setFrame:CGRectMake(0, 366, 320, 88)];
+    }
+    return _addImageView;
 }
 @end

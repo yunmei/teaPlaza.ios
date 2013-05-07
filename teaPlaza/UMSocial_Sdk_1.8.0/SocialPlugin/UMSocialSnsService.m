@@ -75,7 +75,8 @@
     if (snsStrings != nil) {
         [snsListController.visibleViewController performSelector:@selector(setAllSnsArray:) withObject:snsStrings];        
     }
-    [_presentingViewController presentModalViewController:snsListController animated:YES];
+    //[_presentingViewController presentModalViewController:snsListController animated:YES];
+    [_presentingViewController presentViewController:snsListController animated:YES completion:nil];
 }
 
 -(void)showSnsIconSheetView:(UIViewController *)controller appKey:(NSString *)appKey shareText:(NSString *)shareText shareImage:(UIImage *)shareImage shareToSnsStrings:(NSArray *)snsStrings delegate:(id <UMSocialUIDelegate>)delegate
@@ -139,9 +140,11 @@
                             if (result == SLComposeViewControllerResultDone) {
                                 [socialControllerService.socialDataService postSNSWithTypes:[NSArray arrayWithObject:UMShareToFacebook] content:socialControllerService.socialData.shareText image:socialControllerService.socialData.shareImage location:nil urlResource:nil completion:nil];
                             }
-                            [presentingController dismissModalViewControllerAnimated:YES];
+                            //[presentingController dismissModalViewControllerAnimated:YES];
+                            [presentingController dismissViewControllerAnimated:YES completion:nil];
                         };
-                        [presentingController presentModalViewController:slcomposeViewController animated:YES];
+                        //[presentingController presentModalViewController:slcomposeViewController animated:YES];
+                        [presentingController presentViewController:slcomposeViewController animated:YES completion:nil];
                     }
                     
                 }
@@ -175,7 +178,8 @@
                         [slcomposeViewController setInitialText:socialControllerService.socialData.shareText];
                         [slcomposeViewController addImage:socialControllerService.socialData.shareImage];
 
-                        [presentingController presentModalViewController:slcomposeViewController animated:YES];
+                        //[presentingController presentModalViewController:slcomposeViewController animated:YES];
+                        [presentingController presentViewController:slcomposeViewController animated:YES completion:nil];
                     }
                 }
                 else{
@@ -218,7 +222,8 @@
                 [slcomposeViewController setInitialText:socialData.shareText];
                 [slcomposeViewController addImage:socialData.shareImage];                
             }
-            [showViewController presentModalViewController:slcomposeViewController animated:YES];
+            //[showViewController presentModalViewController:slcomposeViewController animated:YES];
+            [showViewController presentViewController:slcomposeViewController animated:YES completion:nil];
         }
         else{
             UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Sorry" message:[NSString stringWithFormat:@"您的%@账号尚未登录，请在系统设置中登录",slName] delegate:nil cancelButtonTitle:@"好" otherButtonTitles: nil];

@@ -157,7 +157,7 @@
         if (snsNamelabel == nil) {
             UILabel *snsNamelabel = [[UILabel alloc] initWithFrame:labelRect];
             snsNamelabel.tag = snsPlatform.shareToType;
-            snsNamelabel.textAlignment = UITextAlignmentCenter;
+            snsNamelabel.textAlignment = NSTextAlignmentCenter;
             [snsNamelabel setBackgroundColor:[UIColor clearColor]];
             [snsNamelabel setTextColor:[UIColor whiteColor]];
             [snsNamelabel setFont:[UIFont systemFontOfSize:12]];
