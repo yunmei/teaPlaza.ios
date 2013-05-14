@@ -67,7 +67,7 @@
     NSLog(@"%f",self.appScrollView.frame.size.height);
         [self.view addSubview:pageControlBackView];
     [self.view addSubview:self.appControl];
-    
+    //
     // 开始网络请求 adArray
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"app.getAdList" forKey:@"method"];
