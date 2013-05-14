@@ -19,6 +19,8 @@
 
 @end
 
+
+
 @implementation AboutViewController
 @synthesize contentTableView;
 @synthesize newVersion;
