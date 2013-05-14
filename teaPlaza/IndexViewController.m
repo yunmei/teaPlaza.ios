@@ -92,7 +92,7 @@
 //        [params setObject:@"12" forKey:@"num"];
 //    } else {
 //        [params setObject:@"8" forKey:@"num"];
-//    }
+//    }//
     [params setObject:@"12" forKey:@"num"];
     op = [YMGlobal getOperation:params];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
