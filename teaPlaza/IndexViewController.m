@@ -90,7 +90,7 @@
     params = [NSMutableDictionary dictionaryWithObject:@"app.getAppChangeList" forKey:@"method"];
 //    if (self.IS_iPhone5) {
 //        [params setObject:@"12" forKey:@"num"];
-//    } else {
+//    } else {、、
 //        [params setObject:@"8" forKey:@"num"];
 //    }//
     [params setObject:@"12" forKey:@"num"];
